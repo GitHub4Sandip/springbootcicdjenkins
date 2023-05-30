@@ -1,32 +1,32 @@
 pipeline {
-    agent {label 'linux'}
+    agent any
     triggers {
         pollSCM '* * * * *'
     }
     stages {
         stage('Version') {
             steps {
-                sh 'gradle --version'
+                bat 'gradle --version'
             }
         }
         stage('Build') {
             steps {
-                sh 'gradle assemble'
+                bat 'gradle assemble'
             }
         }
          stage('Test') {
             steps {
-                sh 'gradle test'
+                bat 'gradle test'
             }
         }
         stage('Build Docker Image') {
             steps {
-                sh 'gradle docker'
+                bat 'gradle docker'
             }
         }
         stage('Run Docker Image') {
             steps {
-                sh 'gradle dockerRun'
+                bat 'gradle dockerRun'
             }
         }
     }
